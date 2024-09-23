@@ -64,7 +64,7 @@ class JiriController extends Controller
      */
     public function update(JiriStoreRequest $request, Jiri $jiri): RedirectResponse
     {
-        $jiri->update($request->all());
+        $jiri->update($request->validated());
 
         return to_route('jiri.show', $jiri);
     }

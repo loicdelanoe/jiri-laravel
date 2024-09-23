@@ -1,5 +1,6 @@
 <x-layouts.main>
     <h2 class="font-bold text-xl">{{ __("Edit this Jiri") }}</h2>
+    <a href="/jiris/{{ $jiri->id }}" class="underline">← {{ __("Back") }}</a>
     <form action="/jiris/{{ $jiri->id }}" method="post" class="flex flex-col gap-4 bg-slate-50 p-4">
         @method('PATCH')
         @csrf

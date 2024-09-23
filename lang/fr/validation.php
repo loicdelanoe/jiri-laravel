@@ -189,6 +189,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        "starting_at" => "commence à",
+        "name" => "nom"
+    ],
 
 ];

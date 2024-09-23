@@ -1,5 +1,6 @@
 <x-layouts.main>
     <h1 class="font-bold text-2xl">{{ $jiri->name }}</h1>
+    <a href="/jiris" class="underline">← {{ __("Back") }}</a>
     <dl class="flex flex-col gap-4 bg-slate-50 p-4">
         <div>
             <dt class="font-bold">{{ __("Jiri name") }}</dt>
