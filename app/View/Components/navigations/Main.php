@@ -18,7 +18,7 @@ class Main extends Component
         $this->title = 'Main Navigation';
         $this->links = [
             ['name' => 'Jiris', 'url' => '/jiris'],
-            ['name' => 'Projects', 'url' => '/projects'],
+            ['name' => __("Projects"), 'url' => '/projects'],
             ['name' => 'Contacts', 'url' => '/contacts'],
         ];
     }

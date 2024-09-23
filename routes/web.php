@@ -7,8 +7,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [JiriController::class, 'index'])->name('jiri.home');
 Route::get('/jiris', [JiriController::class, 'index'])->name('jiri.index');
+
 Route::get('/jiris/create', [JiriController::class, 'create'])->name('jiri.create');
 Route::post('/jiris', [JiriController::class, 'store'])->name('jiri.store');
+
+Route::get('/jiris/{jiri}/edit', [JiriController::class, 'edit'])->name('jiri.edit');
+Route::delete('/jiris/{jiri}', [JiriController::class, 'destroy'])->name('jiri.destroy');
+
+Route::patch('/jiris/{jiri}', [JiriController::class, 'update'])->name('jiri.update');
+
 Route::get('/jiris/{jiri}', [JiriController::class, 'show'])->name('jiri.show');
 
 Route::get('/projects', [ProjectController::class, 'index'])->name('project.index');
