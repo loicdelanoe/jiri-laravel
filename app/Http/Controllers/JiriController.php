@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jiri;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class JiriController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         $upcomingJiris = Jiri::where('starting_at', '>', now())
             ->orderBy('starting_at')
@@ -27,7 +27,7 @@ class JiriController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view('jiri.create');
     }
@@ -48,10 +48,8 @@ class JiriController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Jiri $jiri): View
     {
-        $jiri = Jiri::findOrFail($id);
-
         return view('jiri.show', compact('jiri'));
     }
 
