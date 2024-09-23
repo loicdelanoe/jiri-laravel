@@ -13,6 +13,7 @@
    href="#main-menu">Aller au menu principal</a>
 <div class="flex flex-col-reverse gap-6">
     <main class="flex flex-col gap-4 px-4">
+        {{ $slot }}
     </main>
     <div class="p-4 bg-blue-600">
         <x-navigations.main/>
