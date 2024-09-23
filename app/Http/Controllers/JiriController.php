@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JiriStoreRequest;
 use App\Models\Jiri;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -34,14 +36,9 @@ class JiriController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(JiriStoreRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            "name" => "required|string|between:3,255",
-            "starting_at" => "required|date_format:Y-m-d H:i",
-        ]);
-
-        $jiri = Jiri::create($validated);
+        $jiri = Jiri::create($request->validated());
 
         return to_route('jiri.show', $jiri);
     }
