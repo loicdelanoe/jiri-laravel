@@ -10,6 +10,6 @@
             <x-jiris.list :jiris="$pastJiris"/>
         </section>
     </div>
-    <a class="bg-blue-500 font-bold text-white rounded-md p-2 px-4 tracking-wider uppercase self-start" href="/jiris/create">Create
+    <a class="bg-slate-700 font-bold text-white rounded-md py-4 px-6 self-start inline-block" href="/jiris/create">Create
         a Jiri</a>
 </x-layouts.main>

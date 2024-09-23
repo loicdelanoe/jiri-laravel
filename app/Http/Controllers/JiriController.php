@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Jiri;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class JiriController extends Controller
@@ -37,12 +36,14 @@ class JiriController extends Controller
      */
     public function store(Request $request)
     {
-        $jiri = Jiri::create([
-            "name" => $request['name'],
-            "starting_at" => $request['starting_at']
+        $validated = $request->validate([
+            "name" => "required|string|between:3,255",
+            "starting_at" => "required|date_format:Y-m-d H:i",
         ]);
 
-        return redirect()->route('jiri.show', $jiri->id);
+        $jiri = Jiri::create($validated);
+
+        return to_route('jiri.show', $jiri);
     }
 
     /**

@@ -4,7 +4,11 @@ export default {
       "./resources/**/*.blade.php",
   ],
   theme: {
-    extend: {},
+      fontFamily: {
+          pops: ["Poppins", "sans-serif"]
+      },
+    extend: {
+    },
   },
   plugins: [],
 }
