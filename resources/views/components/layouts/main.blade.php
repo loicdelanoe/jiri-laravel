@@ -8,14 +8,15 @@
     @vite('resources/css/app.css')
     <title>Laravel</title>
 </head>
-<body class="pb-4 font-pops">
+<body class="font-pops min-h-screen">
 <a class="sr-only"
    href="#main-menu">Aller au menu principal</a>
-<div class="flex flex-col-reverse gap-6">
-    <main class="flex flex-col gap-4 px-4">
+<div class="flex flex-row-reverse gap-6 h-screen">
+    <main class="flex flex-col gap-4 px-4 py-12 w-full">
         {{ $slot }}
     </main>
-    <div class="p-4 bg-slate-700">
+    <div class="px-4 py-10 bg-slate-700 w-96">
+        <h1 class="text-3xl font-bold text-white inline-block py-2 px-4">{{ __("Jiris") }}</h1>
         <x-navigations.main/>
     </div>
 </div>

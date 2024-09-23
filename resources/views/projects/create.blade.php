@@ -1,5 +1,6 @@
 <x-layouts.main>
     <h2 class="font-bold text-xl">{{ __("Create a new Project") }}</h2>
+    <a href="/projects" class="underline">← {{ __("Back") }}</a>
     <form action="/projects" method="post" class="flex flex-col gap-4 bg-slate-50 p-4">
         @csrf
         <div class="flex flex-col gap-2">
