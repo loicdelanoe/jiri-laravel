@@ -22,8 +22,8 @@ class ContactStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "firstname" => "required|between:3,255",
-            "lastname" => "required|between:3,255",
+            "first_name" => "required|between:3,255",
+            "last_name" => "required|between:3,255",
             "email" => "required|email:rcs,dns"
         ];
     }

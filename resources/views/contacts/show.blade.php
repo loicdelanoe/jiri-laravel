@@ -11,10 +11,6 @@
     </dl>
     <div class="flex gap-2">
         <a class="bg-slate-700 font-bold text-white rounded-md py-4 px-6 self-start inline-block hover:bg-slate-900 transition" href="/contacts/{{ $contact->id }}/edit">{{ __("Edit this Contact") }}</a>
-        <form action="/contacts/{{ $contact->id }}" method="post">
-            @method('DELETE')
-            @csrf
-            <x-buttons.red>{{ __("Delete this Contact") }}</x-buttons.red>
-        </form>
+        <x-form.contact.delete :$contact/>
     </div>
 </x-layouts.main>

@@ -190,8 +190,8 @@ return [
     'attributes' => [
         "starting_at" => "commence à",
         "name" => "nom",
-        "lastname" => "nom",
-        "firstname" => "prénom",
+        "last_name" => "nom",
+        "first_name" => "prénom",
     ],
 
 ];

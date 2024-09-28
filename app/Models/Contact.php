@@ -14,7 +14,7 @@ class Contact extends Model
     use HasAttributes;
 
     protected $fillable = [
-        "firstname", "lastname", "email"
+        "first_name", "last_name", "email"
     ];
 
     // Old method
@@ -22,10 +22,11 @@ class Contact extends Model
 //    {
 //        return $this->firstname . ' ' .$this->lastname;
 //    }
+
     public function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn(mixed $value, array $attributes) => $attributes['firstname'] . ' ' . $attributes['lastname'],
+            get: fn(mixed $value, array $attributes) => $attributes['first_name'] . ' ' . $attributes['last_name'],
         );
     }
 }
