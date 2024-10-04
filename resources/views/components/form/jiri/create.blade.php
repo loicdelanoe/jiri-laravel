@@ -1,5 +1,6 @@
 <form {{ $attributes }} method="post" class="flex flex-col gap-4 bg-slate-50 p-4">
     @csrf
+    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
     <x-form.input
         label="Name"
         type="text"

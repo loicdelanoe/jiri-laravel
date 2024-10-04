@@ -24,6 +24,7 @@ class JiriStoreRequest extends FormRequest
         return [
             "name" => "required|string|between:3,255",
             "starting_at" => "required|date_format:Y-m-d H:i",
+            "user_id" => "required|integer|exists:users,id",
         ];
     }
 }

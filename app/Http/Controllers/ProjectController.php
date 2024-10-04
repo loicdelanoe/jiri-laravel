@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProjectStoreRequest;
 use App\Models\Project;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ProjectController extends Controller
@@ -14,7 +15,7 @@ class ProjectController extends Controller
      */
     public function index(): View
     {
-        $projects = Project::all();
+        $projects = Auth::user()->projects;
 
         return view('projects.index', compact('projects'));
     }

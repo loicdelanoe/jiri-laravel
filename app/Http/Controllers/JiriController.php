@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\JiriStoreRequest;
 use App\Models\Jiri;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class JiriController extends Controller
 {
@@ -15,12 +16,8 @@ class JiriController extends Controller
      */
     public function index(): View
     {
-        $upcomingJiris = Jiri::where('starting_at', '>', now())
-            ->orderBy('starting_at')
-            ->get();
-        $pastJiris = Jiri::where('starting_at', '<', now())
-            ->orderBy('starting_at', 'desc')
-            ->get();
+        $upcomingJiris = Auth::user()->upcomingJiris;
+        $pastJiris = Auth::user()->pastJiris;
 
         return view('jiri.index', compact('pastJiris', 'upcomingJiris'));
     }
@@ -48,6 +45,10 @@ class JiriController extends Controller
      */
     public function show(Jiri $jiri): View
     {
+        if (!Gate::allows('view', $jiri)) {
+            abort(403);
+        }
+
         return view('jiri.show', compact('jiri'));
     }
 
@@ -56,6 +57,10 @@ class JiriController extends Controller
      */
     public function edit(Jiri $jiri): View
     {
+        if (!Gate::allows('view', $jiri)) {
+            abort(403);
+        }
+
         return view('jiri.edit', compact('jiri'));
     }
 
@@ -64,6 +69,10 @@ class JiriController extends Controller
      */
     public function update(JiriStoreRequest $request, Jiri $jiri): RedirectResponse
     {
+        if (!Gate::allows('update', $jiri)) {
+            abort(403);
+        }
+
         $jiri->update($request->validated());
 
         return to_route('jiri.show', $jiri);
@@ -74,6 +83,10 @@ class JiriController extends Controller
      */
     public function destroy(Jiri $jiri)
     {
+        if (!Gate::allows('delete', $jiri)) {
+            abort(403);
+        }
+
         $jiri->delete();
 
         return to_route('jiri.index');
