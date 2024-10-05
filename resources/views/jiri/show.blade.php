@@ -17,9 +17,32 @@
                 </time>
             </dd>
         </div>
+        <div class="flex gap-6">
+            <article>
+                <h3 class="font-bold mb-2">Students</h3>
+                <ul>
+                    @foreach($jiri->students as $student)
+                        <li>{{ $student->full_name }}</li>
+                    @endforeach
+                </ul>
+            </article>
+            <article>
+                <h3 class="font-bold mb-2">Evaluators</h3>
+                <ul>
+                    @foreach($jiri->evaluators as $evaluator)
+                        <li>{{ $evaluator->full_name }}</li>
+                    @endforeach
+                </ul>
+            </article>
+        </div>
     </dl>
     <div class="flex gap-2">
-        <a class="bg-slate-700 font-bold text-white rounded-md py-4 px-6 self-start inline-block hover:bg-slate-900 transition" href="/jiris/{{ $jiri->id }}/edit">{{ __("Edit this Jiri") }}</a>
-        <x-form.jiri.delete :$jiri/>
+        @can('update', $jiri)
+            <a class="bg-slate-700 font-bold text-white rounded-md py-4 px-6 self-start inline-block hover:bg-slate-900 transition"
+               href="/jiris/{{ $jiri->id }}/edit">{{ __("Edit this Jiri") }}</a>
+        @endcan
+        @can('delete', $jiri)
+            <x-form.jiri.delete :$jiri/>
+        @endcan
     </div>
 </x-layouts.main>
