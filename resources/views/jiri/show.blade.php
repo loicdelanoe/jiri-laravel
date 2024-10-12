@@ -3,11 +3,11 @@
     <a href="/jiris" class="underline">← {{ __("Back") }}</a>
     <dl class="flex flex-col gap-4 bg-slate-50 p-4">
         <div>
-            <dt class="font-bold">{{ __("Jiri name") }}</dt>
+            <dt class="font-bold text-xl mb-4">{{ __("Jiri name") }}</dt>
             <dd>{{ $jiri->name }}</dd>
         </div>
         <div>
-            <dt class="font-bold">{{ __("Starting at") }}</dt>
+            <dt class="font-bold text-xl mb-4">{{ __("Starting at") }}</dt>
             <dd>
                 {{ $jiri->starting_at->diffForHumans() }}
             </dd>
@@ -19,20 +19,53 @@
         </div>
         <div class="flex gap-6">
             <article>
-                <h3 class="font-bold mb-2">Students</h3>
-                <ul>
+                <h3 class="font-bold mb-4 text-xl">{{ __("Students") }}</h3>
+                <ul class="flex flex-col gap-2">
                     @foreach($jiri->students as $student)
-                        <li>{{ $student->full_name }}</li>
+                        <li class="flex items-center gap-6 justify-between">
+                            <div>
+                                <p class="font-bold">{{ $student->full_name }}</p>
+                                <small>{{ $student->email }}</small>
+                            </div>
+                            <form action="{{ route('attendances.update', $student->pivot->id) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="role" value="{{ \App\Enums\ContactRole::Evaluator->value }}">
+                                <x-buttons.thin>{{ __("Change role") }}</x-buttons.thin>
+                            </form>
+                        </li>
                     @endforeach
                 </ul>
             </article>
             <article>
-                <h3 class="font-bold mb-2">Evaluators</h3>
-                <ul>
+                <h3 class="font-bold mb-4 text-xl">{{ __("Evaluators") }}</h3>
+                <ul class="flex flex-col gap-2">
                     @foreach($jiri->evaluators as $evaluator)
-                        <li>{{ $evaluator->full_name }}</li>
+                        <li class="flex items-center gap-6 justify-between">
+                            <div>
+                                <p class="font-bold">{{ $evaluator->full_name }}</p>
+                                <small>{{ $evaluator->email }}</small>
+                            </div>
+                            <form action="{{ route('attendances.update', $evaluator->pivot->id) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="role" value="{{ \App\Enums\ContactRole::Student->value }}">
+                                <x-buttons.thin>{{ __("Change role") }}</x-buttons.thin>
+                            </form>
+                        </li>
                     @endforeach
                 </ul>
+            </article>
+            <article>
+                <h3 class="font-bold mb-4 text-xl">{{ __("Assignements") }}</h3>
+                <ul class="flex flex-col gap-2">
+                    @foreach($jiri->projects as $project)
+                        <li class="flex items-center gap-6 justify-between">
+                            {{ $project->name }}
+                        </li>
+                    @endforeach
+                </ul>
+                <a href="{{ route('assignements.create', $jiri) }}">{{ __("Add assignement(s)") }}</a>
             </article>
         </div>
     </dl>

@@ -6,13 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Attendance extends Model
+class Assignement extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        "role"
-    ];
 
     public function jiri(): BelongsTo
     {

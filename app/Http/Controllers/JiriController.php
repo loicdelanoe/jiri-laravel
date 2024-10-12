@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Jiri;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,10 @@ class JiriController extends Controller
      */
     public function create(): View
     {
-        return view('jiri.create');
+        $contacts = Auth::user()->contacts;
+        $projects = Auth::user()->projects;
+
+        return view('jiri.create', compact('contacts', 'projects'));
     }
 
     /**
@@ -37,13 +41,18 @@ class JiriController extends Controller
     {
         $jiri = Jiri::create($request->validated());
 
+        /** @var \App\Models\Jiri $jiri */
+        $jiri->projects()->attach($request->projects);
+        $jiri->students()->attach($request->students);
+        $jiri->evaluators()->attach($request->evaluators);
+
         return to_route('jiri.show', $jiri);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Jiri $jiri): View
+    public function show(Jiri $jiri)
     {
         $jiri->load(['students', 'evaluators']);
 

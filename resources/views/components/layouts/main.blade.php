@@ -11,11 +11,11 @@
 <body class="font-pops min-h-screen">
 <a class="sr-only"
    href="#main-menu">Aller au menu principal</a>
-<div class="flex flex-row-reverse gap-6 h-screen">
-    <main class="flex flex-col gap-4 px-4 py-12 w-full">
+<div class="flex flex-row-reverse gap-6 min-h-screen">
+    <main class="flex flex-col gap-4 px-4 py-12 w-full ml-72">
         {{ $slot }}
     </main>
-    <div class="px-4 py-10 bg-slate-700 w-96">
+    <div class="px-4 py-10 bg-slate-700 w-1/5 fixed bottom-0 left-0 top-0">
         <h1 class="text-3xl font-bold text-white inline-block py-2 px-4">{{ __("Jiris") }}</h1>
         <x-navigations.main/>
     </div>

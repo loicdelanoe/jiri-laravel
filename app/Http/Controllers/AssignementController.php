@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ContactRole;
+use App\Models\Assignement;
 use App\Models\Attendance;
+use App\Models\Jiri;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
-class AttendanceController extends Controller
+class AssignementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +21,11 @@ class AttendanceController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Jiri $jiri)
     {
-        //
+        $projects = $jiri->projects;
+        
+        return view('assignement.create', compact('projects'));
     }
 
     /**
@@ -29,7 +33,7 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -51,21 +55,16 @@ class AttendanceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Attendance $attendance)
+    public function update(Request $request, Assignement $assignement)
     {
-        $attendance->role = $request->role;
-        $attendance->save();
 
-        return to_route('jiri.show', $attendance->jiri_id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Attendance $attendance)
+    public function destroy(Assignement $assignement)
     {
-        $attendance->delete();
 
-        return to_route('jiri.index');
     }
 }
