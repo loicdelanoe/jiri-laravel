@@ -24,7 +24,9 @@ class ContactStoreRequest extends FormRequest
         return [
             "first_name" => "required|between:3,255",
             "last_name" => "required|between:3,255",
-            "email" => "required|email:rcs,dns"
+            "email" => "required|email:rcs,dns",
+            "user_id" => "required|integer|exists:users,id",
+            "image" => "nullable|image"
         ];
     }
 }

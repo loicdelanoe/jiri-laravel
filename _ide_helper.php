@@ -18931,6 +18931,125 @@ namespace Barryvdh\Debugbar\Facades {
             }
     }
 
+namespace Intervention\Image\Laravel\Facades {
+            /**
+     * 
+     *
+     */        class Image {
+                    /**
+         * Create image manager with given driver
+         *
+         * @link https://image.intervention.io/v3/basics/image-manager
+         * @param string|\Intervention\Image\Interfaces\DriverInterface $driver
+         * @param mixed $options
+         * @return \Intervention\Image\ImageManager 
+         * @static 
+         */        public static function withDriver($driver, ...$options)
+        {
+                        return \Intervention\Image\ImageManager::withDriver($driver, ...$options);
+        }
+                    /**
+         * Create image manager with GD driver
+         *
+         * @link https://image.intervention.io/v3/basics/image-manager#static-gd-driver-constructor
+         * @param mixed $options
+         * @throws DriverException
+         * @return \Intervention\Image\ImageManager 
+         * @static 
+         */        public static function gd(...$options)
+        {
+                        return \Intervention\Image\ImageManager::gd(...$options);
+        }
+                    /**
+         * Create image manager with Imagick driver
+         *
+         * @link https://image.intervention.io/v3/basics/image-manager#static-imagick-driver-constructor
+         * @param mixed $options
+         * @throws DriverException
+         * @return \Intervention\Image\ImageManager 
+         * @static 
+         */        public static function imagick(...$options)
+        {
+                        return \Intervention\Image\ImageManager::imagick(...$options);
+        }
+                    /**
+         * Create new image instance with given width & height
+         *
+         * @see ImageManagerInterface::create()
+         * @link https://image.intervention.io/v3/basics/instantiation#creating-new-images
+         * @param int $width
+         * @param int $height
+         * @throws RuntimeException
+         * @return \Intervention\Image\Interfaces\ImageInterface 
+         * @static 
+         */        public static function create($width, $height)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->create($width, $height);
+        }
+                    /**
+         * Create new image instance from given input which can be one of the following
+         * 
+         * - Path in filesystem
+         * - File Pointer resource
+         * - SplFileInfo object
+         * - Raw binary image data
+         * - Base64 encoded image data
+         * - Data Uri
+         * - Intervention\Image\Image Instance
+         * 
+         * To decode the raw input data, you can optionally specify a decoding strategy
+         * with the second parameter. This can be an array of class names or objects
+         * of decoders to be processed in sequence. In this case, the input must be
+         * decodedable with one of the decoders passed. It is also possible to pass
+         * a single object or class name of a decoder.
+         * 
+         * All decoders that implement the `DecoderInterface::class` can be passed. Usually
+         * a selection of classes of the namespace `Intervention\Image\Decoders`
+         * 
+         * If the second parameter is not set, an attempt to decode the input is made
+         * with all available decoders of the driver.
+         *
+         * @see ImageManagerInterface::read()
+         * @link https://image.intervention.io/v3/basics/instantiation#reading-images
+         * @param mixed $input
+         * @param string|array<string|DecoderInterface>|\Intervention\Image\Interfaces\DecoderInterface $decoders
+         * @throws RuntimeException
+         * @return \Intervention\Image\Interfaces\ImageInterface 
+         * @static 
+         */        public static function read($input, $decoders = [])
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->read($input, $decoders);
+        }
+                    /**
+         * Create new animated image by given callback
+         *
+         * @see ImageManagerInterface::animate()
+         * @link https://image.intervention.io/v3/basics/instantiation#creating-animations
+         * @param callable $init
+         * @throws RuntimeException
+         * @return \Intervention\Image\Interfaces\ImageInterface 
+         * @static 
+         */        public static function animate($init)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->animate($init);
+        }
+                    /**
+         * Return currently used driver
+         *
+         * @see ImageManagerInterface::driver()
+         * @return \Intervention\Image\Interfaces\DriverInterface 
+         * @static 
+         */        public static function driver()
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->driver();
+        }
+            }
+    }
+
 namespace Illuminate\Support {
             /**
      * 
@@ -22701,6 +22820,7 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class Vite extends \Illuminate\Support\Facades\Vite {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
+            class Image extends \Intervention\Image\Laravel\Facades\Image {}
     }
 
 
