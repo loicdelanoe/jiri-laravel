@@ -3,7 +3,7 @@
     <a href="/contacts" class="underline">← {{ __("Back") }}</a>
     <div class="flex w-full gap-4 bg-slate-50 p-4">
         @if($contact->image)
-            <img class="w-24 h-24 rounded-full" src="{{ asset($contact->image) }}" alt="">
+            <x-image.contact :$contact/>
         @else
             <div class="w-24 h-24 rounded-full bg-slate-200"></div>
         @endif

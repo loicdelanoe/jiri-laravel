@@ -26,7 +26,7 @@ class ContactStoreRequest extends FormRequest
             "last_name" => "required|between:3,255",
             "email" => "required|email:rcs,dns",
             "user_id" => "required|integer|exists:users,id",
-            "image" => "nullable|image"
+            "image" => "nullable|image|max:2000"
         ];
     }
 }
