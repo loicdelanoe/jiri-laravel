@@ -1,5 +1,5 @@
 <x-layouts.main>
-    <h1 class="font-bold text-2xl">{{ __("Your Contacts") }}</h1>
+    <h1 class="font-bold text-2xl mb-6">{{ __("Your Contacts") }}</h1>
     <section>
         <x-contacts.list :$contacts />
     </section>

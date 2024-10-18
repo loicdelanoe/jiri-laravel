@@ -5,7 +5,7 @@
         @if($contact->image)
             <x-image.contact :$contact/>
         @else
-            <div class="w-24 h-24 rounded-full bg-slate-200"></div>
+            <x-placeholder.contact/>
         @endif
         <dl class="flex flex-col">
             <div>

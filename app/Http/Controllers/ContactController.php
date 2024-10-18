@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ContactImageStored;
 use App\HasImagesVariant;
 use App\Http\Requests\ContactStoreRequest;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ContactController extends Controller
@@ -35,14 +37,15 @@ class ContactController extends Controller
      */
     public function store(ContactStoreRequest $request)
     {
+        $validated = $request->validated();
+
         if ($request->hasFile('image')) {
-            $path = self::storeImagesVariant($request);
+            $validated['image'] = Storage::putFile('contacts/' . Auth::id() . '/original', $request->file('image'));
         }
 
-        $contact = Contact::create(array_merge(
-            $request->validated(),
-            ['image' => $path ?? null]
-        ));
+        ContactImageStored::dispatch($validated);
+
+        $contact = Contact::create($validated);
 
         return to_route('contact.show', $contact);
     }

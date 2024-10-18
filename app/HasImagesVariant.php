@@ -10,34 +10,30 @@ use Intervention\Image\Laravel\Facades\Image;
 
 trait HasImagesVariant
 {
-    static function storeImagesVariant(ContactStoreRequest $request): string
+    public function storeImagesVariant(string $originalPath): void
     {
-        // Store original picture
-        $path = $request->file('image')->store('contacts/' . Auth::id() . '/original');
-
-        // Get picture from form
-        $avatar = $request->file('image');
-
         // Get sizes from config file
         $sizes = Config::get('photos.sizes');
-        $image = Image::read($avatar);
 
         foreach ($sizes as $size => $value) {
             // Avoid original
             if (!is_int($value)) {
                 continue;
             }
+            $image = Image::read(Storage::get($originalPath));
 
-            // Define the directory where the image will be saved
-            $directory = 'contacts/' . Auth::id() . '/' . $size . '/';
+            $image->scale($value);
 
-            if (!Storage::exists($directory)) {
-                Storage::makeDirectory($directory);
+            $filePath = str_replace('original', $size, $originalPath);
+            $directoryPath = dirname($filePath);
+
+            if (!Storage::exists($directoryPath)) {
+                Storage::makeDirectory($directoryPath);
             }
 
-            Storage::put($directory . $avatar->hashName(), $image->encode());
+            Storage::put($filePath, $image->encode());
         }
 
-        return $path;
+//        return $path;
     }
 }
